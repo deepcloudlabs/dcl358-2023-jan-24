@@ -1,6 +1,6 @@
-# DCL-358: Implementing Event Driven Microservice Architecture using Spring Boot and Apache Kafka
+# DCL-358: Implementing Event-Driven Microservice Architecture using Spring Boot and Apache Kafka
 
-These projects are created as part of the following training: DCL-358: Implementing Event Driven Microservice Architecture using Spring Boot and Apache Kafka
+These projects are created as part of the following training: DCL-358: Implementing Event-Driven Microservice Architecture using Spring Boot and Apache Kafka
 
 Please follow the link for the complete training catalog: https://www.deepcloudlabs.com/resources
 
