@@ -3,3 +3,4 @@ requests
 schedule
 websockets
 kafka-python
+pika
