@@ -1,5 +1,4 @@
-//region Consuming Binance's REST on HTTP Api using Fetch Api
-//region Kafka Producer
+//region Kafka Consumer
 const {Kafka} = require("kafkajs");
 const kafka = new Kafka({
     clientId: "trade-consumer",
@@ -25,7 +24,7 @@ consumer.connect().then(()=>{
 });
 //endregion
 
-//region Consuming Binance's REST on WebSocket Api
+//region WebSocket Client
 const websocket = require('ws');
 const restWsUrl = "ws://localhost:4001/hr/api/v1/events";
 const ws = new websocket(restWsUrl);
@@ -35,5 +34,22 @@ ws.on('message', frame => {
 });
 //endregion
 
+//region RabbitMQ Consumer
+let amqp = require('amqplib/callback_api');
 
-
+amqp.connect('amqp://demoadmin:secret123@127.0.0.1:5672', (err, connection) => {
+    if (err) {
+        throw err;
+    }
+    connection.createChannel((err, channel) => {
+        if (err) {
+            throw err;
+        }
+        channel.consume('hrque', msg => {
+            if (msg.content) {
+                console.log(`rabbitmq: ${msg.content.toString()}`);
+            }
+        }, {noAck: true, exclusive: false});
+    });
+});
+//endregion
