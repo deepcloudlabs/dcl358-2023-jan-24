@@ -8,6 +8,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.example.dto.TickerDTO;
 
+@SuppressWarnings("deprecation")
 @Service
 public class Exercise01 {
 	@Value("${binance.url}")
