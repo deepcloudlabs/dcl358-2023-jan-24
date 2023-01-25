@@ -18,7 +18,7 @@ public class HrEventListenerService {
 	@KafkaListener(topics = "${topicName}", groupId = "${spring.application.name}")
 	public void listenHrEvent(String eventAsString) throws Exception {
 		var hrEvent = objectMapper.readValue(eventAsString, HrEventDTO.class);
-		System.err.println("New hr event has arrived: %s.".formatted(hrEvent));
+		System.err.println("New hr event has arrived from kafka: %s.".formatted(hrEvent));
 		var restTemplate = new RestTemplate();
 		var employee = restTemplate.getForEntity("http://localhost:4001/hr/api/v1/employees/%s".formatted(hrEvent.getIdentityNo().getValue()), String.class).getBody();
 		System.out.println(employee);
