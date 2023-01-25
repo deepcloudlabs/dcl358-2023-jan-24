@@ -1,0 +1,216 @@
+{
+	"openapi": "3.0.1",
+	"info": {
+		"title": "OpenAPI definition",
+		"version": "v0"
+	},
+	"servers": [
+		{
+			"url": "http://localhost:4001/hr/api/v1",
+			"description": "Generated server url"
+		}
+	],
+	"paths": {
+		"/employees": {
+			"post": {
+				"tags": [
+					"hr-rest-controller"
+				],
+				"operationId": "hireEmployee",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/HireEmployeeRequest"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/HireEmployeeResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/employees/{identityNo}": {
+			"get": {
+				"tags": [
+					"hr-rest-controller"
+				],
+				"operationId": "getEmployee",
+				"parameters": [
+					{
+						"name": "identityNo",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/EmployeeResponse"
+								}
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"tags": [
+					"hr-rest-controller"
+				],
+				"operationId": "fireEmployee",
+				"parameters": [
+					{
+						"name": "identityNo",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/FireEmployeeResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"HireEmployeeRequest": {
+				"required": [
+					"currency",
+					"department",
+					"firstName",
+					"jobStyle",
+					"lastName",
+					"photo"
+				],
+				"type": "object",
+				"properties": {
+					"identity": {
+						"type": "string"
+					},
+					"firstName": {
+						"type": "string"
+					},
+					"lastName": {
+						"type": "string"
+					},
+					"iban": {
+						"type": "string"
+					},
+					"salary": {
+						"minimum": 8500,
+						"type": "number",
+						"format": "double"
+					},
+					"birthYear": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"currency": {
+						"type": "string",
+						"enum": [
+							"TL",
+							"EURO",
+							"USD"
+						]
+					},
+					"department": {
+						"type": "string"
+					},
+					"photo": {
+						"type": "string"
+					},
+					"jobStyle": {
+						"type": "string"
+					}
+				}
+			},
+			"HireEmployeeResponse": {
+				"type": "object",
+				"properties": {
+					"status": {
+						"type": "string"
+					}
+				}
+			},
+			"EmployeeResponse": {
+				"type": "object",
+				"properties": {
+					"identity": {
+						"type": "string"
+					},
+					"firstName": {
+						"type": "string"
+					},
+					"lastName": {
+						"type": "string"
+					},
+					"iban": {
+						"type": "string"
+					},
+					"salary": {
+						"type": "number",
+						"format": "double"
+					},
+					"currency": {
+						"type": "string",
+						"enum": [
+							"TL",
+							"EURO",
+							"USD"
+						]
+					},
+					"department": {
+						"type": "string"
+					},
+					"photo": {
+						"type": "string"
+					},
+					"jobStyle": {
+						"type": "string"
+					},
+					"birthYear": {
+						"type": "integer",
+						"format": "int32"
+					}
+				}
+			},
+			"FireEmployeeResponse": {
+				"type": "object",
+				"properties": {
+					"status": {
+						"type": "string"
+					}
+				}
+			}
+		}
+	}
+}
